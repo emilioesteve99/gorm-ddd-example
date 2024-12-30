@@ -135,7 +135,5 @@ func (c *BaseHttpController) BuildPaginationOptions(page *int, limit *int) commo
 	if limit != nil {
 		result.Limit = *limit
 	}
-	println("page", result.Page)
-	println("limit", result.Limit)
 	return result
 }

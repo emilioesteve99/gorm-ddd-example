@@ -54,8 +54,13 @@ func initGormAdapters(Container container.Container) {
 			userGormToUserConverter,
 		)
 	})
-	container.MustSingleton(Container, func() domainConverters.ConverterWithExtraArgs[userDomainQueries.UserPaginateFindQuery, *gorm.DB, *gorm.DB] {
+	container.MustSingleton(Container, func() domainConverters.ConverterWithExtraArgs[userDomainQueries.UserFindQuery, *gorm.DB, *gorm.DB] {
 		return userGormConverters.NewUserFindQueryToUserGormFindQueryConverter()
+	})
+	container.MustSingleton(Container, func(
+		userFindQueryToUserGormFindQueryConverter domainConverters.ConverterWithExtraArgs[userDomainQueries.UserFindQuery, *gorm.DB, *gorm.DB],
+	) domainConverters.ConverterWithExtraArgs[userDomainQueries.UserPaginateFindQuery, *gorm.DB, *gorm.DB] {
+		return userGormConverters.NewUserPaginateFindQueryToUserGormFindQueryConverter(userFindQueryToUserGormFindQueryConverter)
 	})
 	container.MustSingleton(Container, func(userGormToUserConverter domainConverters.Converter[userGormModels.UserGorm, userDomainModels.User]) domainConverters.ConverterWithExtraArgs[[]userGormModels.UserGorm, commonDomainModels.PaginationContext, commonDomainModels.PaginatedItems[userDomainModels.User]] {
 		return userGormConverters.NewUsersGormToPaginatedUsersConverter(userGormToUserConverter)

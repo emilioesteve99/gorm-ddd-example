@@ -12,12 +12,12 @@ func NewUserFindQueryToUserGormFindQueryConverter() *UserFindQueryToUserGormFind
 	return &UserFindQueryToUserGormFindQueryConverter{}
 }
 
-func (c *UserFindQueryToUserGormFindQueryConverter) Convert(input userDomainQueries.UserPaginateFindQuery, cursor *gorm.DB, _ context.Context) (*gorm.DB, error) {
-	if input.Query.Email != nil {
-		cursor = cursor.Where("email = ?", *input.Query.Email)
+func (c *UserFindQueryToUserGormFindQueryConverter) Convert(input userDomainQueries.UserFindQuery, cursor *gorm.DB, _ context.Context) (*gorm.DB, error) {
+	if input.Email != nil {
+		cursor = cursor.Where("email = ?", *input.Email)
 	}
-	if input.Query.Ids != nil && len(*input.Query.Ids) > 0 {
-		cursor = cursor.Where("id IN ?", *input.Query.Ids)
+	if input.Ids != nil && len(*input.Ids) > 0 {
+		cursor = cursor.Where("id IN ?", *input.Ids)
 	}
 
 	return cursor, nil
