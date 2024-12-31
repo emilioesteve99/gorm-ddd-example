@@ -10,12 +10,12 @@ import (
 var Container = container.Global
 
 func InitDependencies() {
+	InitConfigDependencies(Container)
 	controllers := []any{
 		commonControllers.NewBaseHttpController,
 		commonControllers.NewHealthcheckController,
 	}
 	commonInfraUtils.RegisterSingletonFactories(controllers, Container)
-
 	InitCommonGormDependencies(Container)
 	userioc.InitUserDependencies(Container)
 }

@@ -1,21 +1,22 @@
 package gormdb
 
 import (
+	"fmt"
+	"gorm-ddd-example/src/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"time"
 )
 
-//type Config struct {
-//	Host     string
-//	User     string
-//	Password string
-//	DBName   string
-//	Port     string
-//}
-
-func NewGormDB() *gorm.DB {
-	dsn := "host=db user=user password=password dbname=database port=5432 sslmode=disable"
+func NewGormDB(cfg config.Config) *gorm.DB {
+	dsn := fmt.Sprintf(
+		"host=%s user=%s password=%s dbname=%s port=%d sslmode=disable",
+		cfg.Db.Host,
+		cfg.Db.Username,
+		cfg.Db.Password,
+		cfg.Db.Name,
+		cfg.Db.Port,
+	)
 	db, openDbErr := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		TranslateError: true,
 	})

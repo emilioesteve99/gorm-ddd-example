@@ -11,5 +11,6 @@ RUN go build -o ./main ./src/common/infrastructure/http/server/main.go
 FROM alpine:latest
 WORKDIR /root/
 COPY --from=builder /app/main .
+COPY --from=builder /app/config.json .
 EXPOSE 3000
 CMD ["./main"]
