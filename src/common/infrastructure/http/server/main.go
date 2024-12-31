@@ -29,15 +29,15 @@ func main() {
 	)
 	r.GET("/metrics", gin.WrapH(metricsHandler))
 
-	var insertOneUserController *userControllers.InsertOneUserController
+	var insertOneUserController userControllers.InsertOneUserController
 	container.MustResolve(commonDependencies.Container, &insertOneUserController)
 	r.POST("/v1/users", insertOneUserController.InsertOne)
 
-	var findOneUserController *userControllers.FindOneUserController
+	var findOneUserController userControllers.FindOneUserController
 	container.MustResolve(commonDependencies.Container, &findOneUserController)
 	r.GET("/v1/users/:id", findOneUserController.FindOne)
 
-	var paginateFindUserController *userControllers.PaginateFindUserController
+	var paginateFindUserController userControllers.PaginateFindUserController
 	container.MustResolve(commonDependencies.Container, &paginateFindUserController)
 	r.GET("/v1/users", paginateFindUserController.PaginateFind)
 

@@ -24,8 +24,8 @@ func NewFindOneUserHttpController(
 		userDomainQueries.UserFindOneQuery,
 		userDomainModels.User,
 	],
-) *FindOneUserController {
-	return &FindOneUserController{
+) FindOneUserController {
+	return FindOneUserController{
 		BaseHttpController:      baseHttpController,
 		userFindOneQueryHandler: userFindOneQueryHandler,
 	}

@@ -19,8 +19,8 @@ type PaginateFindUserController struct {
 func NewPaginateFindUserHttpController(
 	baseHttpController *commonHttpControllers.BaseHttpController,
 	userPaginateFindQueryHandler commonApplicationQueryHandlers.PaginateFindQueryHandler[userDomainQueries.UserPaginateFindQuery, userDomainModels.User],
-) *PaginateFindUserController {
-	return &PaginateFindUserController{
+) PaginateFindUserController {
+	return PaginateFindUserController{
 		BaseHttpController:           baseHttpController,
 		userPaginateFindQueryHandler: userPaginateFindQueryHandler,
 	}

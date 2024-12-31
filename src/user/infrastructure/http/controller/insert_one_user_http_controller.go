@@ -24,8 +24,8 @@ func NewInsertOneUserHttpController(
 		userDomainCommands.UserInsertOneCommand,
 		userDomainModels.User,
 	],
-) *InsertOneUserController {
-	return &InsertOneUserController{
+) InsertOneUserController {
+	return InsertOneUserController{
 		BaseHttpController:          baseHttpController,
 		userInsertOneCommandHandler: userInsertOneCommandHandler,
 	}
