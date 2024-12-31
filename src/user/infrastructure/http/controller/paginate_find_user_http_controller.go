@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-type PaginateFindUserHttpController struct {
+type PaginateFindUserController struct {
 	*commonHttpControllers.BaseHttpController
 	userPaginateFindQueryHandler commonApplicationQueryHandlers.PaginateFindQueryHandler[userDomainQueries.UserPaginateFindQuery, userDomainModels.User]
 }
@@ -19,8 +19,8 @@ type PaginateFindUserHttpController struct {
 func NewPaginateFindUserHttpController(
 	baseHttpController *commonHttpControllers.BaseHttpController,
 	userPaginateFindQueryHandler commonApplicationQueryHandlers.PaginateFindQueryHandler[userDomainQueries.UserPaginateFindQuery, userDomainModels.User],
-) *PaginateFindUserHttpController {
-	return &PaginateFindUserHttpController{
+) *PaginateFindUserController {
+	return &PaginateFindUserController{
 		BaseHttpController:           baseHttpController,
 		userPaginateFindQueryHandler: userPaginateFindQueryHandler,
 	}
@@ -32,7 +32,7 @@ type paginateFindUserQueryParams struct {
 	Limit *int    `form:"limit" binding:"omitempty,min=1"`
 }
 
-func (c *PaginateFindUserHttpController) PaginateFind(ctx *gin.Context) {
+func (c *PaginateFindUserController) PaginateFind(ctx *gin.Context) {
 	var queryParams paginateFindUserQueryParams
 	if err := c.BindQueryParams(ctx, &queryParams); err != nil {
 		return

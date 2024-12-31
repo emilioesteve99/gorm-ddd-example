@@ -11,7 +11,7 @@ type UserInsertOneCommandHandler struct {
 	commonApplicationCommandHandlers.InsertOneCommandHandler[userDomainCommands.UserInsertOneCommand, userDomainModels.User]
 }
 
-func NewUserInsertOneCommandHandler(insertOneUserManager commonDomainManagers.InsertOneManager[userDomainCommands.UserInsertOneCommand, userDomainModels.User]) *UserInsertOneCommandHandler {
+func NewUserInsertOneCommandHandler(insertOneUserManager commonDomainManagers.InsertOneManager[userDomainCommands.UserInsertOneCommand, userDomainModels.User]) commonApplicationCommandHandlers.InsertOneCommandHandler[userDomainCommands.UserInsertOneCommand, userDomainModels.User] {
 	return &UserInsertOneCommandHandler{
 		InsertOneCommandHandler: commonApplicationCommandHandlers.NewBaseInsertOneCommandHandler[
 			userDomainCommands.UserInsertOneCommand,

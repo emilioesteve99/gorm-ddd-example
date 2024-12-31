@@ -14,7 +14,7 @@ type UsersGormToPaginatedUsersConverter struct {
 
 func NewUsersGormToPaginatedUsersConverter(
 	userGormToUserConverter domainConverters.Converter[userGormModels.UserGorm, userDomainModels.User],
-) *UsersGormToPaginatedUsersConverter {
+) domainConverters.ConverterWithExtraArgs[[]userGormModels.UserGorm, commonDomainModels.PaginationContext, commonDomainModels.PaginatedItems[userDomainModels.User]] {
 	return &UsersGormToPaginatedUsersConverter{
 		ConverterWithExtraArgs: commonGormConverters.NewBaseModelsDBToPaginatedModelsConverter(userGormToUserConverter),
 	}

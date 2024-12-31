@@ -14,7 +14,7 @@ type InsertOneUserManager struct {
 	commonDomainManagers.InsertOneManager[userDomainCommands.UserInsertOneCommand, userDomainModels.User]
 }
 
-func NewInsertOneUserManager(insertOneAdapter commonDomainAdapters.InsertOneAdapter[userDomainCommands.UserInsertOneCommand, userDomainModels.User]) *InsertOneUserManager {
+func NewInsertOneUserManager(insertOneAdapter commonDomainAdapters.InsertOneAdapter[userDomainCommands.UserInsertOneCommand, userDomainModels.User]) commonDomainManagers.InsertOneManager[userDomainCommands.UserInsertOneCommand, userDomainModels.User] {
 	return &InsertOneUserManager{
 		InsertOneManager: *commonDomainManagers.NewBaseInsertOneManager[
 			userDomainCommands.UserInsertOneCommand,

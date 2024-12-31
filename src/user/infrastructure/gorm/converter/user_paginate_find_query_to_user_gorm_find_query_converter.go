@@ -11,7 +11,13 @@ type UserPaginateFindQueryToUserGormFindQueryConverter struct {
 	userFindQueryToUserGormFindQueryConverter domainConverters.ConverterWithExtraArgs[userDomainQueries.UserFindQuery, *gorm.DB, *gorm.DB]
 }
 
-func NewUserPaginateFindQueryToUserGormFindQueryConverter(userFindQueryToUserGormFindQueryConverter domainConverters.ConverterWithExtraArgs[userDomainQueries.UserFindQuery, *gorm.DB, *gorm.DB]) *UserPaginateFindQueryToUserGormFindQueryConverter {
+func NewUserPaginateFindQueryToUserGormFindQueryConverter(
+	userFindQueryToUserGormFindQueryConverter domainConverters.ConverterWithExtraArgs[
+		userDomainQueries.UserFindQuery,
+		*gorm.DB,
+		*gorm.DB,
+	],
+) domainConverters.ConverterWithExtraArgs[userDomainQueries.UserPaginateFindQuery, *gorm.DB, *gorm.DB] {
 	return &UserPaginateFindQueryToUserGormFindQueryConverter{userFindQueryToUserGormFindQueryConverter: userFindQueryToUserGormFindQueryConverter}
 }
 

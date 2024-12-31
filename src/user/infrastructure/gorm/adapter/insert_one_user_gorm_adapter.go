@@ -18,7 +18,7 @@ func NewInsertOneUserGormAdapter(
 	db *gorm.DB,
 	userInsertOneCommandToUserGormConverter domainConverters.Converter[userDomainCommands.UserInsertOneCommand, userGormModels.UserGorm],
 	userGormToUserConverter domainConverters.Converter[userGormModels.UserGorm, userDomainModels.User],
-) *InsertOneUserGormAdapter {
+) commonDomainAdapters.InsertOneAdapter[userDomainCommands.UserInsertOneCommand, userDomainModels.User] {
 	return &InsertOneUserGormAdapter{
 		InsertOneAdapter: commonGormAdapters.NewInsertOneGormAdapter[
 			userDomainCommands.UserInsertOneCommand,

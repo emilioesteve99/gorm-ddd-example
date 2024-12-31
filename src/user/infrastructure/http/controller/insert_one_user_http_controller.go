@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-type InsertOneUserHttpController struct {
+type InsertOneUserController struct {
 	*commonHttpControllers.BaseHttpController
 	userInsertOneCommandHandler commonApplicationCommandHandlers.InsertOneCommandHandler[
 		userDomainCommands.UserInsertOneCommand,
@@ -24,8 +24,8 @@ func NewInsertOneUserHttpController(
 		userDomainCommands.UserInsertOneCommand,
 		userDomainModels.User,
 	],
-) *InsertOneUserHttpController {
-	return &InsertOneUserHttpController{
+) *InsertOneUserController {
+	return &InsertOneUserController{
 		BaseHttpController:          baseHttpController,
 		userInsertOneCommandHandler: userInsertOneCommandHandler,
 	}
@@ -37,7 +37,7 @@ type insertOneUserBody struct {
 	Password string `json:"password" binding:"required"`
 }
 
-func (c *InsertOneUserHttpController) InsertOne(ctx *gin.Context) {
+func (c *InsertOneUserController) InsertOne(ctx *gin.Context) {
 	var body insertOneUserBody
 	if err := c.BindJSONBody(ctx, &body); err != nil {
 		return

@@ -19,7 +19,7 @@ func NewPaginateFindUserGormAdapter(
 	db *gorm.DB,
 	userFindQueryToGormUserFindQueryConverter domainConverters.ConverterWithExtraArgs[userDomainQueries.UserPaginateFindQuery, *gorm.DB, *gorm.DB],
 	usersToPaginatedUsersConverter domainConverters.ConverterWithExtraArgs[[]userGormModels.UserGorm, commonDomainModels.PaginationContext, commonDomainModels.PaginatedItems[userDomainModels.User]],
-) *PaginateFindUserGormAdapter {
+) commonDomainAdapters.PaginateFindAdapter[userDomainQueries.UserPaginateFindQuery, userDomainModels.User] {
 	return &PaginateFindUserGormAdapter{
 		PaginateFindAdapter: commonGormAdapters.NewPaginateFindGormAdapter(
 			db,

@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-type FindOneUserHttpController struct {
+type FindOneUserController struct {
 	*commonHttpControllers.BaseHttpController
 	userFindOneQueryHandler commonApplicationQueryHandlers.FindOneQueryHandler[
 		userDomainQueries.UserFindOneQuery,
@@ -24,8 +24,8 @@ func NewFindOneUserHttpController(
 		userDomainQueries.UserFindOneQuery,
 		userDomainModels.User,
 	],
-) *FindOneUserHttpController {
-	return &FindOneUserHttpController{
+) *FindOneUserController {
+	return &FindOneUserController{
 		BaseHttpController:      baseHttpController,
 		userFindOneQueryHandler: userFindOneQueryHandler,
 	}
@@ -35,7 +35,7 @@ type findOneUserPathParams struct {
 	Id string `uri:"id" binding:"required,uuid"`
 }
 
-func (c *FindOneUserHttpController) FindOne(ctx *gin.Context) {
+func (c *FindOneUserController) FindOne(ctx *gin.Context) {
 	var pathParams findOneUserPathParams
 	if err := c.BindUri(ctx, &pathParams); err != nil {
 		return

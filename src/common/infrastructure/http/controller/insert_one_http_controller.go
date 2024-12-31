@@ -1,4 +1,4 @@
-package commonHttpControllers
+package commonControllers
 
 import "github.com/gin-gonic/gin"
 

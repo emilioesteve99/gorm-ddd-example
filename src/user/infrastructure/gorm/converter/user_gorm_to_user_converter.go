@@ -2,13 +2,14 @@ package userGormConverters
 
 import (
 	"context"
+	domainConverters "gorm-ddd-example/src/common/domain/converter"
 	userDomainModels "gorm-ddd-example/src/user/domain/model"
 	userGormModels "gorm-ddd-example/src/user/infrastructure/gorm/model"
 )
 
 type UserGormToUserConverter struct{}
 
-func NewUserGormToUserConverter() *UserGormToUserConverter {
+func NewUserGormToUserConverter() domainConverters.Converter[userGormModels.UserGorm, userDomainModels.User] {
 	return &UserGormToUserConverter{}
 }
 

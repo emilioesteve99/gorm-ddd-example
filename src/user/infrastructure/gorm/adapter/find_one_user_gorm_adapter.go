@@ -18,7 +18,7 @@ func NewFindOneUserGormAdapter(
 	db *gorm.DB,
 	userFindOneQueryToUserGormConverter domainConverters.ConverterWithExtraArgs[userDomainQueries.UserFindOneQuery, *gorm.DB, *gorm.DB],
 	userGormToUserConverter domainConverters.Converter[userGormModels.UserGorm, userDomainModels.User],
-) *FindOneUserGormAdapter {
+) commonDomainAdapters.FindOneAdapter[userDomainQueries.UserFindOneQuery, userDomainModels.User] {
 	return &FindOneUserGormAdapter{
 		FindOneAdapter: commonGormAdapters.NewFindOneGormAdapter[
 			userDomainQueries.UserFindOneQuery,

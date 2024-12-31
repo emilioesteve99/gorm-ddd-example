@@ -2,21 +2,19 @@ package commonDependencies
 
 import (
 	"github.com/golobby/container/v3"
-	httpControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
+	commonControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
+	commonInfraUtils "gorm-ddd-example/src/common/infrastructure/utils"
 	userioc "gorm-ddd-example/src/user/infrastructure/ioc"
 )
 
-var Container container.Container
+var Container = container.Global
 
 func InitDependencies() {
-	Container = container.Global
-
-	container.MustSingleton(Container, func() *httpControllers.BaseHttpController {
-		return httpControllers.NewBaseHttpController()
-	})
-	container.MustSingleton(Container, func() *httpControllers.HealthcheckController {
-		return httpControllers.NewHealthcheckController()
-	})
+	controllers := []any{
+		commonControllers.NewBaseHttpController,
+		commonControllers.NewHealthcheckController,
+	}
+	commonInfraUtils.RegisterSingletonFactories(controllers, Container)
 
 	InitCommonGormDependencies(Container)
 	userioc.InitUserDependencies(Container)

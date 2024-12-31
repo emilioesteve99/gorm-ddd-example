@@ -11,7 +11,7 @@ type PaginateFindUserManager struct {
 	commonDomainManagers.PaginateFindManager[userDomainQueries.UserPaginateFindQuery, userDomainModels.User]
 }
 
-func NewPaginateFindUserManager(paginateFindUserAdapter commonDomainAdapters.PaginateFindAdapter[userDomainQueries.UserPaginateFindQuery, userDomainModels.User]) *PaginateFindUserManager {
+func NewPaginateFindUserManager(paginateFindUserAdapter commonDomainAdapters.PaginateFindAdapter[userDomainQueries.UserPaginateFindQuery, userDomainModels.User]) commonDomainManagers.PaginateFindManager[userDomainQueries.UserPaginateFindQuery, userDomainModels.User] {
 	return &PaginateFindUserManager{
 		PaginateFindManager: commonDomainManagers.NewBasePaginateFindManager(paginateFindUserAdapter),
 	}

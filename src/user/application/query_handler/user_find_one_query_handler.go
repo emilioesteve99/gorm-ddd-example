@@ -11,7 +11,7 @@ type UserFindOneQueryHandler struct {
 	commonApplicationQueryHandlers.FindOneQueryHandler[userDomainQueries.UserFindOneQuery, userDomainModels.User]
 }
 
-func NewUserFindOneQueryHandler(findOneUserManager commonDomainManagers.FindOneManager[userDomainQueries.UserFindOneQuery, userDomainModels.User]) *UserFindOneQueryHandler {
+func NewUserFindOneQueryHandler(findOneUserManager commonDomainManagers.FindOneManager[userDomainQueries.UserFindOneQuery, userDomainModels.User]) commonApplicationQueryHandlers.FindOneQueryHandler[userDomainQueries.UserFindOneQuery, userDomainModels.User] {
 	return &UserFindOneQueryHandler{
 		FindOneQueryHandler: commonApplicationQueryHandlers.NewBaseFindOneQueryHandler[
 			userDomainQueries.UserFindOneQuery,

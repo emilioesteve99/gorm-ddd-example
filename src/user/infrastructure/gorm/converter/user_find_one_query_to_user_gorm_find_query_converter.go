@@ -2,13 +2,14 @@ package userGormConverters
 
 import (
 	"context"
+	domainConverters "gorm-ddd-example/src/common/domain/converter"
 	userDomainQueries "gorm-ddd-example/src/user/domain/query"
 	"gorm.io/gorm"
 )
 
 type UserFindOneQueryToUserGormFindQueryConverter struct{}
 
-func NewUserFindOneQueryToUserGormFindQueryConverter() *UserFindOneQueryToUserGormFindQueryConverter {
+func NewUserFindOneQueryToUserGormFindQueryConverter() domainConverters.ConverterWithExtraArgs[userDomainQueries.UserFindOneQuery, *gorm.DB, *gorm.DB] {
 	return &UserFindOneQueryToUserGormFindQueryConverter{}
 }
 

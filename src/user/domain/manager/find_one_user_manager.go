@@ -11,7 +11,7 @@ type FindOneUserManager struct {
 	commonDomainManagers.FindOneManager[userDomainQueries.UserFindOneQuery, userDomainModels.User]
 }
 
-func NewFindOneUserManager(findOneAdapter commonDomainAdapters.FindOneAdapter[userDomainQueries.UserFindOneQuery, userDomainModels.User]) *FindOneUserManager {
+func NewFindOneUserManager(findOneAdapter commonDomainAdapters.FindOneAdapter[userDomainQueries.UserFindOneQuery, userDomainModels.User]) commonDomainManagers.FindOneManager[userDomainQueries.UserFindOneQuery, userDomainModels.User] {
 	return &FindOneUserManager{
 		FindOneManager: commonDomainManagers.NewBaseFindOneManager[
 			userDomainQueries.UserFindOneQuery,
