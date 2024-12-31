@@ -9,7 +9,7 @@ import (
 
 func GetConfig() Config {
 	cfg := Config{}
-	configFileBytes, readFileErr := os.ReadFile("./config.json")
+	configFileBytes, readFileErr := os.ReadFile("./environment/config.json")
 	if readFileErr != nil {
 		panic(readFileErr)
 	}
@@ -29,5 +29,6 @@ func GetConfig() Config {
 		panic(parseEnvErr)
 	}
 
+	ValidateConfig()
 	return cfg
 }
