@@ -3,7 +3,7 @@ package userControllers
 import (
 	"github.com/gin-gonic/gin"
 	commonApplicationQueryHandlers "gorm-ddd-example/src/common/application/query_handler"
-	commonHttpControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
+	commonControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
 	commonHttpModels "gorm-ddd-example/src/common/infrastructure/http/model"
 	userDomainModels "gorm-ddd-example/src/user/domain/model"
 	userDomainQueries "gorm-ddd-example/src/user/domain/query"
@@ -11,7 +11,7 @@ import (
 )
 
 type FindOneUserController struct {
-	*commonHttpControllers.BaseHttpController
+	*commonControllers.BaseHttpController
 	userFindOneQueryHandler commonApplicationQueryHandlers.FindOneQueryHandler[
 		userDomainQueries.UserFindOneQuery,
 		userDomainModels.User,
@@ -19,23 +19,25 @@ type FindOneUserController struct {
 }
 
 func NewFindOneUserHttpController(
-	baseHttpController *commonHttpControllers.BaseHttpController,
+	baseHttpController *commonControllers.BaseHttpController,
 	userFindOneQueryHandler commonApplicationQueryHandlers.FindOneQueryHandler[
 		userDomainQueries.UserFindOneQuery,
 		userDomainModels.User,
 	],
-) FindOneUserController {
-	return FindOneUserController{
+) *FindOneUserController {
+	controller := &FindOneUserController{
 		BaseHttpController:      baseHttpController,
 		userFindOneQueryHandler: userFindOneQueryHandler,
 	}
+	commonControllers.RegisterController(controller)
+	return controller
 }
 
 type findOneUserPathParams struct {
 	Id string `uri:"id" binding:"required,uuid"`
 }
 
-func (c *FindOneUserController) FindOne(ctx *gin.Context) {
+func (c *FindOneUserController) Control(ctx *gin.Context) {
 	var pathParams findOneUserPathParams
 	if err := c.BindUri(ctx, &pathParams); err != nil {
 		return
@@ -56,4 +58,12 @@ func (c *FindOneUserController) FindOne(ctx *gin.Context) {
 	if httpErr == nil {
 		ctx.JSON(http.StatusOK, user)
 	}
+}
+
+func (c *FindOneUserController) Method() string {
+	return http.MethodGet
+}
+
+func (c *FindOneUserController) Path() string {
+	return "/v1/users/:id"
 }

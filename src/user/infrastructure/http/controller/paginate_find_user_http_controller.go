@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	commonApplicationQueryHandlers "gorm-ddd-example/src/common/application/query_handler"
 	commonDomainQueries "gorm-ddd-example/src/common/domain/query"
-	commonHttpControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
+	commonControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
 	commonHttpModels "gorm-ddd-example/src/common/infrastructure/http/model"
 	userDomainModels "gorm-ddd-example/src/user/domain/model"
 	userDomainQueries "gorm-ddd-example/src/user/domain/query"
@@ -12,18 +12,20 @@ import (
 )
 
 type PaginateFindUserController struct {
-	*commonHttpControllers.BaseHttpController
+	*commonControllers.BaseHttpController
 	userPaginateFindQueryHandler commonApplicationQueryHandlers.PaginateFindQueryHandler[userDomainQueries.UserPaginateFindQuery, userDomainModels.User]
 }
 
 func NewPaginateFindUserHttpController(
-	baseHttpController *commonHttpControllers.BaseHttpController,
+	baseHttpController *commonControllers.BaseHttpController,
 	userPaginateFindQueryHandler commonApplicationQueryHandlers.PaginateFindQueryHandler[userDomainQueries.UserPaginateFindQuery, userDomainModels.User],
-) PaginateFindUserController {
-	return PaginateFindUserController{
+) *PaginateFindUserController {
+	controller := &PaginateFindUserController{
 		BaseHttpController:           baseHttpController,
 		userPaginateFindQueryHandler: userPaginateFindQueryHandler,
 	}
+	commonControllers.RegisterController(controller)
+	return controller
 }
 
 type paginateFindUserQueryParams struct {
@@ -32,7 +34,7 @@ type paginateFindUserQueryParams struct {
 	Limit *int    `form:"limit" binding:"omitempty,min=1"`
 }
 
-func (c *PaginateFindUserController) PaginateFind(ctx *gin.Context) {
+func (c *PaginateFindUserController) Control(ctx *gin.Context) {
 	var queryParams paginateFindUserQueryParams
 	if err := c.BindQueryParams(ctx, &queryParams); err != nil {
 		return
@@ -55,4 +57,12 @@ func (c *PaginateFindUserController) PaginateFind(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusCreated, paginatedUsers)
+}
+
+func (c *PaginateFindUserController) Method() string {
+	return http.MethodGet
+}
+
+func (c *PaginateFindUserController) Path() string {
+	return "/v1/users"
 }

@@ -3,7 +3,7 @@ package userControllers
 import (
 	"github.com/gin-gonic/gin"
 	commonApplicationCommandHandlers "gorm-ddd-example/src/common/application/command_handler"
-	commonHttpControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
+	commonControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
 	commonHttpModels "gorm-ddd-example/src/common/infrastructure/http/model"
 	userDomainCommands "gorm-ddd-example/src/user/domain/command"
 	userDomainModels "gorm-ddd-example/src/user/domain/model"
@@ -11,7 +11,7 @@ import (
 )
 
 type InsertOneUserController struct {
-	*commonHttpControllers.BaseHttpController
+	*commonControllers.BaseHttpController
 	userInsertOneCommandHandler commonApplicationCommandHandlers.InsertOneCommandHandler[
 		userDomainCommands.UserInsertOneCommand,
 		userDomainModels.User,
@@ -19,16 +19,18 @@ type InsertOneUserController struct {
 }
 
 func NewInsertOneUserHttpController(
-	baseHttpController *commonHttpControllers.BaseHttpController,
+	baseHttpController *commonControllers.BaseHttpController,
 	userInsertOneCommandHandler commonApplicationCommandHandlers.InsertOneCommandHandler[
 		userDomainCommands.UserInsertOneCommand,
 		userDomainModels.User,
 	],
-) InsertOneUserController {
-	return InsertOneUserController{
+) *InsertOneUserController {
+	controller := &InsertOneUserController{
 		BaseHttpController:          baseHttpController,
 		userInsertOneCommandHandler: userInsertOneCommandHandler,
 	}
+	commonControllers.RegisterController(controller)
+	return controller
 }
 
 type insertOneUserBody struct {
@@ -37,7 +39,7 @@ type insertOneUserBody struct {
 	Password string `json:"password" binding:"required"`
 }
 
-func (c *InsertOneUserController) InsertOne(ctx *gin.Context) {
+func (c *InsertOneUserController) Control(ctx *gin.Context) {
 	var body insertOneUserBody
 	if err := c.BindJSONBody(ctx, &body); err != nil {
 		return
@@ -57,4 +59,12 @@ func (c *InsertOneUserController) InsertOne(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusCreated, user)
+}
+
+func (c *InsertOneUserController) Method() string {
+	return http.MethodPost
+}
+
+func (c *InsertOneUserController) Path() string {
+	return "/v1/users"
 }
