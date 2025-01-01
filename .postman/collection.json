@@ -108,7 +108,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:5000/metrics",
+					"raw": "localhost:9000/metrics",
 					"host": [
 						"localhost"
 					],
