@@ -3,8 +3,6 @@ package commonControllers
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"gorm-ddd-example/src/metrics"
 )
 
 type Controller interface {
@@ -21,13 +19,6 @@ func RegisterController(controller Controller) {
 }
 
 func RegisterServerRoutes(server *gin.Engine) {
-	prometheusRegistry := metrics.NewPrometheusRegistry()
-	metricsHandler := promhttp.HandlerFor(prometheusRegistry, promhttp.HandlerOpts{})
-	metricsHandler = promhttp.InstrumentMetricHandler(
-		prometheusRegistry,
-		metricsHandler,
-	)
-	server.GET("/metrics", gin.WrapH(metricsHandler))
 	for _, controller := range ControllersMapByName {
 		server.Handle(controller.Method(), controller.Path(), controller.Control)
 	}

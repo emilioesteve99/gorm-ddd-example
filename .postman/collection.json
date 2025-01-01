@@ -24,11 +24,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/v1/users",
+							"raw": "localhost:5000/v1/users",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"v1",
 								"users"
@@ -43,11 +43,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/v1/users?limit=10",
+							"raw": "localhost:5000/v1/users?limit=10",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"v1",
 								"users"
@@ -68,11 +68,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/v1/users/080e1037-dcb5-44ba-a419-f5a783544c3e",
+							"raw": "localhost:5000/v1/users/080e1037-dcb5-44ba-a419-f5a783544c3e",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "5000",
 							"path": [
 								"v1",
 								"users",
@@ -90,11 +90,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/healthcheck",
+					"raw": "localhost:5000/healthcheck",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "5000",
 					"path": [
 						"healthcheck"
 					]
@@ -108,11 +108,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/metrics",
+					"raw": "localhost:5000/metrics",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "5000",
 					"path": [
 						"metrics"
 					]

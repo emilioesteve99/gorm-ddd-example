@@ -2,7 +2,7 @@ package commonMiddlewares
 
 import (
 	"github.com/gin-gonic/gin"
-	"gorm-ddd-example/src/metrics"
+	"gorm-ddd-example/src/common/infrastructure/http/metrics"
 	"time"
 )
 

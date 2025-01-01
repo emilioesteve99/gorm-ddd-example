@@ -1,6 +1,6 @@
 {
   "server": {
-    "port": 3000
+    "port": 5000
   },
   "db": {
     "host": "db",
@@ -10,7 +10,7 @@
     "database": "database"
   },
   "metrics": {
-    "port": 3000,
+    "port": 9000,
     "enabled": true
   }
 }
