@@ -1,10 +1,12 @@
 package utils
 
 func Contains[T comparable](slice []T, item T) bool {
+	res := false
 	for _, s := range slice {
 		if s == item {
-			return true
+			res = true
+			break
 		}
 	}
-	return false
+	return res
 }
