@@ -20,6 +20,7 @@ func NewBaseHttpController() *BaseHttpController {
 var httpStatusCodeByErrorCode = map[appErrors.ErrorCode]int{
 	appErrors.UnknownCode:         http.StatusInternalServerError,
 	appErrors.InvalidArgumentCode: http.StatusConflict,
+	appErrors.UnauthorizedCode:    http.StatusUnauthorized,
 }
 
 func getJSONFieldName(request any, fieldName string) string {
@@ -112,6 +113,16 @@ func (c *BaseHttpController) ConvertErrorToHttpStatusCode(err error) int {
 	}
 
 	return httpStatusCode
+}
+
+func (c *BaseHttpController) SendError(ctx *gin.Context, err error) {
+	statusCode := c.ConvertErrorToHttpStatusCode(err)
+	message := err.Error()
+	if statusCode == http.StatusInternalServerError {
+		message = "Internal server error"
+	}
+	httpError := commonHttpModels.HttpErrorResponse{Message: message}
+	ctx.JSON(statusCode, httpError)
 }
 
 func (c *BaseHttpController) Send404ErrIfEntityNotFound(ctx *gin.Context, entity any) *commonHttpModels.HttpErrorResponse {

@@ -2,6 +2,7 @@ package commonDependencies
 
 import (
 	"github.com/golobby/container/v3"
+	authioc "gorm-ddd-example/src/auth/infrastructure/ioc"
 	commonControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
 	commonInfraUtils "gorm-ddd-example/src/common/infrastructure/utils"
 	userioc "gorm-ddd-example/src/user/infrastructure/ioc"
@@ -18,4 +19,5 @@ func InitDependencies() {
 	commonInfraUtils.RegisterSingletonFactories(controllers, Container)
 	InitCommonGormDependencies(Container)
 	userioc.InitUserDependencies(Container)
+	authioc.InitAuthDependencies(Container)
 }

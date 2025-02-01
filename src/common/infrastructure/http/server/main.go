@@ -13,7 +13,6 @@ import (
 )
 
 func startMetricsServer(cfg config.Config) {
-	println(cfg.Metrics.Enabled)
 	if cfg.Metrics.Enabled {
 		r := gin.Default()
 		prometheusRegistry := metrics.NewPrometheusRegistry()

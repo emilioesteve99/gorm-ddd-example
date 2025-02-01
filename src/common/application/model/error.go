@@ -8,7 +8,7 @@ type AppError struct {
 }
 
 func (a AppError) Error() string {
-	return fmt.Sprintf("%s [Code %d]", a.Message, a.Code)
+	return fmt.Sprintf("%s [code %d]", a.Message, a.Code)
 }
 
 func BuildUnknownError(err error) AppError {

@@ -3,11 +3,11 @@ module gorm-ddd-example
 go 1.23.4
 
 require (
-	github.com/agiledragon/gomonkey/v2 v2.12.0
 	github.com/caarlos0/env/v9 v9.0.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-playground/validator/v10 v10.20.0
 	github.com/goccy/go-json v0.10.2
+	github.com/golang-jwt/jwt/v4 v4.5.1
 	github.com/golobby/container/v3 v3.3.2
 	github.com/google/uuid v1.6.0
 	github.com/imdario/mergo v0.3.11

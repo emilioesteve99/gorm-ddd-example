@@ -53,6 +53,9 @@
         }
       },
       "required": ["port", "enabled"]
+    },
+    "secret": {
+      "type": "string"
     }
   },
   "required": ["server", "db", "metrics"]

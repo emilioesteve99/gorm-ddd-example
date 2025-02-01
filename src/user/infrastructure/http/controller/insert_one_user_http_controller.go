@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	commonApplicationCommandHandlers "gorm-ddd-example/src/common/application/command_handler"
 	commonControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
-	commonHttpModels "gorm-ddd-example/src/common/infrastructure/http/model"
 	userDomainCommands "gorm-ddd-example/src/user/domain/command"
 	userDomainModels "gorm-ddd-example/src/user/domain/model"
 	"net/http"
@@ -52,9 +51,7 @@ func (c *InsertOneUserController) Control(ctx *gin.Context) {
 	}
 	user, err := c.userInsertOneCommandHandler.Handle(command, ctx)
 	if err != nil {
-		httpError := commonHttpModels.HttpErrorResponse{Message: err.Error()}
-		statusCode := c.ConvertErrorToHttpStatusCode(err)
-		ctx.JSON(statusCode, httpError)
+		c.SendError(ctx, err)
 		return
 	}
 

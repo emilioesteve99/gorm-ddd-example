@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	commonApplicationQueryHandlers "gorm-ddd-example/src/common/application/query_handler"
 	commonControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
-	commonHttpModels "gorm-ddd-example/src/common/infrastructure/http/model"
 	userDomainModels "gorm-ddd-example/src/user/domain/model"
 	userDomainQueries "gorm-ddd-example/src/user/domain/query"
 	"net/http"
@@ -48,9 +47,7 @@ func (c *FindOneUserController) Control(ctx *gin.Context) {
 		Ids: &ids,
 	}, ctx)
 	if err != nil {
-		httpError := commonHttpModels.HttpErrorResponse{Message: err.Error()}
-		statusCode := c.ConvertErrorToHttpStatusCode(err)
-		ctx.JSON(statusCode, httpError)
+		c.SendError(ctx, err)
 		return
 	}
 

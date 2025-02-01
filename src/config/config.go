@@ -21,4 +21,5 @@ type Config struct {
 	Db      `json:"db" envPrefix:"DB_"`
 	Server  `json:"server"`
 	Metrics `json:"metrics"`
+	Secret  string `json:"secret"`
 }

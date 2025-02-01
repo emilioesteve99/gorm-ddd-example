@@ -12,5 +12,6 @@
   "metrics": {
     "port": 9000,
     "enabled": true
-  }
+  },
+  "secret": "secret-example"
 }

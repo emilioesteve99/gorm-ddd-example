@@ -5,7 +5,6 @@ import (
 	commonApplicationQueryHandlers "gorm-ddd-example/src/common/application/query_handler"
 	commonDomainQueries "gorm-ddd-example/src/common/domain/query"
 	commonControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
-	commonHttpModels "gorm-ddd-example/src/common/infrastructure/http/model"
 	userDomainModels "gorm-ddd-example/src/user/domain/model"
 	userDomainQueries "gorm-ddd-example/src/user/domain/query"
 	"net/http"
@@ -50,9 +49,7 @@ func (c *PaginateFindUserController) Control(ctx *gin.Context) {
 	}
 	paginatedUsers, err := c.userPaginateFindQueryHandler.Handle(query, ctx)
 	if err != nil {
-		httpError := commonHttpModels.HttpErrorResponse{Message: err.Error()}
-		statusCode := c.ConvertErrorToHttpStatusCode(err)
-		ctx.JSON(statusCode, httpError)
+		c.SendError(ctx, err)
 		return
 	}
 
