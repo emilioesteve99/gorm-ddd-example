@@ -20,7 +20,7 @@ func TestAppError_Error(t *testing.T) {
 		res := err.Error()
 
 		t.Run("should return a string", func(t *testing.T) {
-			assert.Equal(t, fmt.Sprintf("%s [Code %d]", messageFixture, codeFixture), res)
+			assert.Equal(t, fmt.Sprintf("%s [code %d]", messageFixture, codeFixture), res)
 		})
 	})
 }
