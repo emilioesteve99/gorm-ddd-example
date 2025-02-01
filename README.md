@@ -3,7 +3,7 @@
 ## Description
 This is a simple API that allows to create, read and delete users
 
-It is built using Go and PostgresSQL
+It's been built using Go, Gin, GORM and PostgresSQL
 
 It's been implemented using SOLID principles and Domain Driven Design
 
