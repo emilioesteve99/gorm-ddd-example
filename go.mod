@@ -7,7 +7,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-playground/validator/v10 v10.20.0
 	github.com/goccy/go-json v0.10.2
-	github.com/golang-jwt/jwt/v4 v4.5.1
+	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/golobby/container/v3 v3.3.2
 	github.com/google/uuid v1.6.0
 	github.com/imdario/mergo v0.3.11

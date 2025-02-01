@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golobby/container/v3"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	authMiddlewares "gorm-ddd-example/src/auth/infrastructure/http/middleware"
 	commonControllers "gorm-ddd-example/src/common/infrastructure/http/controller"
 	"gorm-ddd-example/src/common/infrastructure/http/metrics"
 	commonMiddlewares "gorm-ddd-example/src/common/infrastructure/http/middleware"
@@ -32,13 +33,14 @@ func startMetricsServer(cfg config.Config) {
 func main() {
 	commonDependencies.InitDependencies()
 
-	r := gin.Default()
-	r.Use(commonMiddlewares.RequestDurationMiddleware())
-
-	commonControllers.RegisterServerRoutes(r)
-
 	var cfg config.Config
 	container.MustResolve(commonDependencies.Container, &cfg)
+
+	r := gin.Default()
+	r.Use(commonMiddlewares.RequestDurationMiddleware())
+	r.Use(authMiddlewares.AuthMiddleware(cfg))
+
+	commonControllers.RegisterServerRoutes(r)
 
 	go func() {
 		startMetricsServer(cfg)

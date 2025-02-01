@@ -2,7 +2,7 @@ package authDomainConverters
 
 import (
 	"context"
-	"github.com/golang-jwt/jwt/v4"
+	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 	authDomainCommands "gorm-ddd-example/src/auth/domain/command"
 	authDomainModels "gorm-ddd-example/src/auth/domain/model"
