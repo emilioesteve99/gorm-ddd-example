@@ -65,3 +65,7 @@ func (c *InsertOneUserController) Method() string {
 func (c *InsertOneUserController) Path() string {
 	return "/v1/users"
 }
+
+func (c *InsertOneUserController) IsPrivate() bool {
+	return false
+}

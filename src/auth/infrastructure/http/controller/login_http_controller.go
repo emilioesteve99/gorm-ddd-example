@@ -56,3 +56,7 @@ func (c *LoginHttpController) Method() string {
 func (c *LoginHttpController) Path() string {
 	return "/v1/auth/log-ins"
 }
+
+func (c *LoginHttpController) IsPrivate() bool {
+	return false
+}

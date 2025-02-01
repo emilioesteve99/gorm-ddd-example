@@ -21,3 +21,7 @@ func (controller *HealthcheckController) Method() string {
 func (controller *HealthcheckController) Path() string {
 	return "/healthcheck"
 }
+
+func (controller *HealthcheckController) IsPrivate() bool {
+	return false
+}

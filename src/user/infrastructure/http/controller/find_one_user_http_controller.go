@@ -64,3 +64,7 @@ func (c *FindOneUserController) Method() string {
 func (c *FindOneUserController) Path() string {
 	return "/v1/users/:id"
 }
+
+func (c *FindOneUserController) IsPrivate() bool {
+	return true
+}

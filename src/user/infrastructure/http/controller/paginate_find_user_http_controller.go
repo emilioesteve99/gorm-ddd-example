@@ -63,3 +63,7 @@ func (c *PaginateFindUserController) Method() string {
 func (c *PaginateFindUserController) Path() string {
 	return "/v1/users"
 }
+
+func (c *PaginateFindUserController) IsPrivate() bool {
+	return true
+}
