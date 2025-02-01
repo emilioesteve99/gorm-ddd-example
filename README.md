@@ -1,7 +1,7 @@
-# Project Name
+# GORM DDD EXAMPLE
 
 ## Description
-This is a simple API that allows to create, read, update, and delete users
+This is a simple API that allows to create, read and delete users
 
 It is built using Go and PostgresSQL
 

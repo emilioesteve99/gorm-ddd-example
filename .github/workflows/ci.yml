@@ -9,8 +9,30 @@ on:
       - main
 
 jobs:
+  filter:
+    runs-on: ubuntu-latest
+    outputs:
+      tests: ${{ steps.filter.outputs.tests }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Filter changes
+        id: filter
+        uses: dorny/paths-filter@v2
+        with:
+          filters: |
+            tests:
+              - 'src/**'
+              - 'go.mod'
+              - 'go.sum'
+              - '.github/workflows/ci.yml'
+
   ci:
     runs-on: ubuntu-latest
+    needs: filter
+    if: ${{ needs.filter.outputs.tests == 'true' }}
 
     steps:
       - name: Checkout code
