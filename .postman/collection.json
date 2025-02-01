@@ -10,7 +10,7 @@
 			"name": "users",
 			"item": [
 				{
-					"name": "Insert one user",
+					"name": "Insert One User",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -38,10 +38,16 @@
 					"response": []
 				},
 				{
-					"name": "Paginate find users",
+					"name": "Paginate Find Users",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzg2NjkyMzMsInN1YiI6IjJkZTExNjM3LTBhMTItNGY0OS05MmEwLWEyZDQ4ZjIwZjUwOCJ9.RCqPnSpiFa8kPJHKUv893Axd_J1DCo4eCR4XJ_vQu2U",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost:5000/v1/users?limit=10",
 							"host": [
@@ -63,12 +69,18 @@
 					"response": []
 				},
 				{
-					"name": "Find one user",
+					"name": "Find One User",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzg2NjkyMzMsInN1YiI6IjJkZTExNjM3LTBhMTItNGY0OS05MmEwLWEyZDQ4ZjIwZjUwOCJ9.RCqPnSpiFa8kPJHKUv893Axd_J1DCo4eCR4XJ_vQu2U",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:5000/v1/users/080e1037-dcb5-44ba-a419-f5a783544c3e",
+							"raw": "localhost:5000/v1/users/2de11637-0a12-4f49-92a0-a2d48f20f508",
 							"host": [
 								"localhost"
 							],
@@ -76,7 +88,41 @@
 							"path": [
 								"v1",
 								"users",
-								"080e1037-dcb5-44ba-a419-f5a783544c3e"
+								"2de11637-0a12-4f49-92a0-a2d48f20f508"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Log In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user@example.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/v1/auth/log-ins",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"v1",
+								"auth",
+								"log-ins"
 							]
 						}
 					},
@@ -112,7 +158,7 @@
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "9000",
 					"path": [
 						"metrics"
 					]
